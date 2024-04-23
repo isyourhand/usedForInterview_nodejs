@@ -26,3 +26,20 @@ exports.createOne = (Model, type) =>
       },
     });
   });
+
+exports.getAll = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Model.find({}); //within the APIFeatures class, the query method is used to obtain the query object that has been processed by the filter(),sort(),limitFields(),and peginate() methods.
+    // query.sort().select().skip().limit()
+
+    // SEND QUERY
+    res.status(200).json({
+      // Jsend格式
+      status: "success",
+      requestedAt: req.requestTime,
+      results: doc.length,
+      data: {
+        data: doc,
+      },
+    });
+  });
