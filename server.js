@@ -12,6 +12,10 @@ mongoose.connect(db).then(() => {
 
 const port = 5000;
 
-const server = app.listen(port, () => {
+const hostName =
+  process.env.NODE_ENV === "development" ? "127.0.0.1" : "0.0.0.0";
+console.log(hostName);
+
+const server = app.listen(port, hostName, () => {
   console.log(`App running on port ${port}...`);
 });
